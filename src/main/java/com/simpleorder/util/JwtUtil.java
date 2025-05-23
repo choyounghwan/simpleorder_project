@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
-import com.simpleorder.domain.user.User;
+
+import com.simpleorder.entity.user.User;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
@@ -30,7 +32,7 @@ public class JwtUtil {
             .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .signWith(key, SignatureAlgorithm.HS512)
             .compact();
-    }
+    }   
 
     public String getUsernameFromToken(String token) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
@@ -41,6 +43,17 @@ public class JwtUtil {
             .parseClaimsJws(token)
             .getBody()
             .getSubject();
+    }
+
+    public String getRoleFromToken(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        
+        return Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody()
+            .get("role", String.class);
     }
 
     public boolean validateToken(String token) {

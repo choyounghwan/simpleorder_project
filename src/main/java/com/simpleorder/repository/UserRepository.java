@@ -1,7 +1,8 @@
 package com.simpleorder.repository;
 
-import com.simpleorder.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.simpleorder.entity.user.User;
 
 import java.util.Optional;
 

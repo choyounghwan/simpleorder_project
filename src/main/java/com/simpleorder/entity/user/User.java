@@ -1,4 +1,4 @@
-package com.simpleorder.domain.user;
+package com.simpleorder.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;

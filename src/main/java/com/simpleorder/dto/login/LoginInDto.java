@@ -1,11 +1,11 @@
-package com.simpleorder.dto;
+package com.simpleorder.dto.login;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class LoginInDto {
     private String username;
     private String password;
 }

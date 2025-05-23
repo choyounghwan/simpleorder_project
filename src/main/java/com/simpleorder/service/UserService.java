@@ -2,7 +2,8 @@ package com.simpleorder.service;
 
 import org.springframework.stereotype.Service;
 
-import com.simpleorder.domain.user.User;
+import com.simpleorder.dto.user.UserInDto;
+import com.simpleorder.entity.user.User;
 import com.simpleorder.repository.UserRepository;
 import com.simpleorder.util.JwtUtil;
 
@@ -15,10 +16,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
-    public void saveUser(User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+    public void saveUser(UserInDto userInDto) {
+        if (userRepository.existsByUsername(userInDto.getUsername())) {
             throw new IllegalArgumentException("이미 존재하는 사용자입니다.");
         }
+        User user = UserInDto.toEntity(userInDto);
         userRepository.save(user);
     }
 
