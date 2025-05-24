@@ -1,5 +1,6 @@
 package com.simpleorder.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class UserController {
         return new LoginOutDto(token);
     }
 
-    @PostMapping("/user/mypage")
+    @GetMapping("/user/mypage")
     public String mypage() {
         
         return "JWT 성공";
