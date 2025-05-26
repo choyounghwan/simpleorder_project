@@ -19,7 +19,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     //상품 등록 서비스
-    public void createProduct(ProductInDto productInDto) {
+    public void insertProduct(ProductInDto productInDto) {
         if(productRepository.existsByProductname(productInDto.getProductname())) {
             throw new IllegalArgumentException("이미 존재하는 상품입니다.");
         }
@@ -52,5 +52,11 @@ public class ProductService {
             .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. ID: " + id));
         
         productRepository.delete(product);
+    }
+
+    //상품 정보 수정 서비스
+    public void updateProductById(Long id, ProductInDto productInDto) {
+        Product product = productRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. ID: " + id));
     }
 }

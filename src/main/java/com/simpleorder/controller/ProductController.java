@@ -16,6 +16,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class ProductController {
     //상품 등록
     @PostMapping("/admin/register_product")
     public String registerProduct(@RequestBody ProductInDto product) {
-        productService.createProduct(product);
+        productService.insertProduct(product);
         return "상품이 등록되었습니다.";
     }
 
@@ -39,14 +41,21 @@ public class ProductController {
     
     //상품 단건 조회
     @GetMapping("/product_list/{id}")
-    public ProductOutDto getProductById(@PathVariable("id") Long id) {
+    public ProductOutDto getProductById(@PathVariable Long id) {
         return productService.selectProductById(id);
     }
 
     //상품 삭제
     @DeleteMapping("/admin/delete_product/{id}")
-    public String removeProductById(@PathVariable("id") Long id) {
+    public String removeProductById(@PathVariable Long id) {
         productService.deleteProductById(id);
         return "상품이 삭제되었습니다.";
+    }
+
+    //상품 정보 수정
+    @PutMapping("/admin/update_product/{id}")
+    public String updateProductById(@PathVariable Long id, @RequestBody ProductInDto product) {
+        productService.updateProductById(id, product);
+        return "상품 정보가 수정되었습니다.";
     }
 }
