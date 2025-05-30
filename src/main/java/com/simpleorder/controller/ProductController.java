@@ -41,20 +41,20 @@ public class ProductController {
     
     //상품 단건 조회
     @GetMapping("/product_list/{id}")
-    public ProductOutDto getProductById(@PathVariable Long id) {
+    public ProductOutDto getProductById(@PathVariable("id") Long id) {
         return productService.selectProductById(id);
     }
 
     //상품 삭제
     @DeleteMapping("/admin/delete_product/{id}")
-    public String removeProductById(@PathVariable Long id) {
+    public String removeProductById(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return "상품이 삭제되었습니다.";
     }
 
     //상품 정보 수정
     @PutMapping("/admin/update_product/{id}")
-    public String updateProductById(@PathVariable Long id, @RequestBody ProductInDto product) {
+    public String updateProductById(@PathVariable("id") Long id, @RequestBody ProductInDto product) {
         productService.updateProductById(id, product);
         return "상품 정보가 수정되었습니다.";
     }

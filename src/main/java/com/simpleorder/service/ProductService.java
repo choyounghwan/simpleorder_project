@@ -58,5 +58,11 @@ public class ProductService {
     public void updateProductById(Long id, ProductInDto productInDto) {
         Product product = productRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. ID: " + id));
+
+        product.setProductname(productInDto.getProductname());
+        product.setPrice(productInDto.getPrice());
+        product.setStock(productInDto.getStock());
+
+        productRepository.save(product);
     }
 }
